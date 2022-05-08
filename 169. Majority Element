@@ -1,0 +1,83 @@
+/*
+169. Majority Element
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: 3
+Example 2:
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+
+
+
+
+*/
+
+
+//Hashmap
+
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count=0;
+        int Max=nums[0];
+        unordered_map<int,int> mpp;
+         for(auto it : nums)
+         {
+              if(mpp.find(it)!=mpp.end())
+             {
+                  auto x=mpp.find(it);
+                  mpp[it]++;
+                  if(x->second>count)
+                  {
+                      count=x->second;
+                      Max=it;
+                  }
+             }
+             
+             else
+                 mpp[it]=1;
+    }   
+        return Max;
+    }
+};
+
+
+
+//Moores Voting ALgorithm
+
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count=0;
+        int Max=nums[0];
+         for(int i=0;i<nums.size();i++)
+         {
+              if(count==0)
+             {
+                count++;
+                  Max=nums[i];
+             }
+             else if(Max==nums[i])
+              count++;
+             else
+                 count--;
+            
+             
+       
+    }   
+        return Max;
+    }
+};
+
